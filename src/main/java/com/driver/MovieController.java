@@ -32,36 +32,36 @@ public class MovieController {
     @GetMapping("/get-movie-by-name/{name}")
     public ResponseEntity<Movie> getMovieByName(@PathVariable String name) {
         Movie movie = movieService.getMovieByName(name);
-        return new ResponseEntity<>(movie, HttpStatus.CREATED);
+        return new ResponseEntity<>(movie, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/get-director-by-name/{name}")
     public ResponseEntity<Director> getDirectorByName(@PathVariable String name) {
         Director director = movieService.getDirectorByName(name);
-        return new ResponseEntity<>(director, HttpStatus.CREATED);
+        return new ResponseEntity<>(director, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/get-movies-by-director-name/{director}")
     public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable String director) {
         List<String> movies = movieService.getMoviesByDirectorName(director);
-        return new ResponseEntity<>(movies, HttpStatus.CREATED);
+        return new ResponseEntity<>(movies, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/get-all-movies")
     public ResponseEntity<List<String>> findAllMovies() {
         List<String> movies = movieService.findAllMovies();
-        return new ResponseEntity<>(movies, HttpStatus.CREATED);
+        return new ResponseEntity<>(movies, HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete-director-by-name")
     public ResponseEntity<String> deleteDirectorByName(@RequestParam String director) {
         movieService.deleteDirectorByName(director);
-        return new ResponseEntity<>(director + " removed successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(director + " removed successfully", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/delete-all-directors")
     public ResponseEntity<String> deleteAllDirectors() {
         movieService.deleteAllDirectors();
-        return new ResponseEntity<>("All directors deleted successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>("All directors deleted successfully", HttpStatus.BAD_REQUEST);
     }
 }
