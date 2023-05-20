@@ -62,8 +62,16 @@ public class MovieRepository {
     }
 
     public void deleteAllDirectors() {
-        directors.clear();
-        movies.clear();
-        movieDirectorPairs.clear();
+        List<String> directorsToRemove = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entry : movieDirectorPairs.entrySet()) {
+            String director = entry.getKey();
+            List<String> movies = entry.getValue();
+            if (movies.isEmpty()) {
+                directorsToRemove.add(director);
+            }
+        }
+        for (String director : directorsToRemove) {
+            movieDirectorPairs.remove(director);
+        }
     }
 }
